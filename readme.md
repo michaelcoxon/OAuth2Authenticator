@@ -1,6 +1,7 @@
 ## OAuth2Authenticator
 
-A command line tool that lets you authenticate via OAuth2. The authenticator will pop a window and allow the user to login. Access tokens are printed to STD_OUT as JSON.
+A command line tool that lets you authenticate via OAuth2. The authenticator will pop a window 
+and allow the user to login. Access tokens are printed to STD_OUT as JSON.
 
 ## Usage
 
@@ -15,8 +16,10 @@ oauth2 --authorize_uri https://login.microsoftonline.com/common/oauth2/v2.0/auth
 
 This command will output one of the following:
 
-1. On a successful authentication, the utility will dump the JSON of the token URL response to the console STDOUT with an error code of 0.
-2. On a failed authentication, the utility will set the error code to -1 and dump the error response to both STDOUT and STDERR.
+1. On a successful authentication, the utility will dump the JSON of the token URL response to 
+   the console STDOUT with an error code of 0.
+2. On a failed authentication, the utility will set the error code to -1 and dump the error 
+   response to both STDOUT and STDERR.
 
 ## Compile
 
@@ -26,4 +29,5 @@ To compile, open the project in Visual Studio and build it. There really is noth
 
 ## Contribute
 
-Yes.. contribute! just issue a pull request and I will do a code review and either merge it in or offer changes. Nothing too crazy round these parts.
+Yes.. contribute! just issue a pull request and I will do a code review and either merge it in or 
+offer changes. Nothing too crazy round these parts.

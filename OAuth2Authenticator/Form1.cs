@@ -13,11 +13,11 @@ namespace OAuth2Authenticator
 {
     public partial class Form1 : Form
     {
-        private CommandLineOptions _options;
+        private readonly CommandLineOptions _options;
 
-        public Form1()
+        public Form1(CommandLineOptions options)
         {
-            Parser.Default.ParseArguments<CommandLineOptions>(Environment.GetCommandLineArgs()).WithParsed(opts => this._options = opts);
+            this._options = options;
 
             this.InitializeComponent();
 
@@ -69,9 +69,9 @@ namespace OAuth2Authenticator
 
             if (!string.IsNullOrEmpty(error))
             {
-                Application.Exit();
                 Console.WriteLine($"ERROR: {error}");
                 Console.Error.WriteLine(error);
+                Environment.Exit(-1);
                 return;
             }
 
@@ -99,8 +99,8 @@ namespace OAuth2Authenticator
                     var result = await response.Content.ReadAsStringAsync();
                     this.Invoke(new Action(() =>
                     {
-                        Application.Exit();
                         Console.WriteLine(result);
+                        Environment.Exit(0);
                     }));
                 }
             }
@@ -114,6 +114,13 @@ namespace OAuth2Authenticator
                 $"&response_mode=query" +
                 $"&scope={this._options.Scope}" +
                 $"&state=12345";
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Console.WriteLine($"ERROR: USER_CANCEL");
+            Console.Error.WriteLine("USER_CANCEL");
+            Environment.Exit(-1);
         }
     }
 }

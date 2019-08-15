@@ -15,9 +15,13 @@ namespace OAuth2Authenticator
         [STAThread]
         static void Main(string[] args)
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Parser.Default.ParseArguments<CommandLineOptions>(Environment.GetCommandLineArgs())
+                .WithParsed(opts =>
+                {
+                    Application.EnableVisualStyles();
+                    Application.SetCompatibleTextRenderingDefault(false);
+                    Application.Run(new Form1(opts));
+                });
         }
     }
 }

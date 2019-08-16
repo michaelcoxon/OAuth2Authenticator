@@ -34,5 +34,6 @@ namespace OAuth2Authenticator
     public enum ResponseHandlerEnum
     {
         StdOut,
+        Env,
     }
 }

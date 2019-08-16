@@ -50,6 +50,10 @@ namespace OAuth2Authenticator
                                 })
                                 ;
                             break;
+
+                        case ResponseHandlerEnum.Env:
+                            responseHandler = new EnvironmentVariableResponseHandler();
+                            break;
                     }
 
                     _context = new ApplicationContext(new Form1(opts, responseHandler));

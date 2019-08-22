@@ -16,14 +16,14 @@ namespace OAuth2Authenticator
         {
             var mainParser = new Parser(options =>
             {
-                options.CaseInsensitiveEnumValues = false;
+                options.CaseInsensitiveEnumValues = true;
                 options.CaseSensitive = false;
                 options.IgnoreUnknownArguments = true;
             });
 
             var rhParser = new Parser(options =>
             {
-                options.CaseInsensitiveEnumValues = false;
+                options.CaseInsensitiveEnumValues = true;
                 options.CaseSensitive = false;
                 options.IgnoreUnknownArguments = false;
             });
@@ -52,7 +52,19 @@ namespace OAuth2Authenticator
                             break;
 
                         case ResponseHandlerEnum.Env:
-                            responseHandler = new EnvironmentVariableResponseHandler();
+                            rhParser.ParseArguments<EnvironmentVariableResponseHandler.EnvironmentVariableCommandLineOptions>(args)
+                                .WithParsed(rhOpts => responseHandler = new EnvironmentVariableResponseHandler(rhOpts))
+                                .WithNotParsed(errors =>
+                                {
+                                    // bad args are bad.
+                                    Environment.ExitCode = -1;
+                                    Application.Exit();
+                                })
+                                ;
+                            break;
+
+                        case ResponseHandlerEnum.Access_Token:
+                            responseHandler = new AccessTokenResponseHandler();
                             break;
                     }
 

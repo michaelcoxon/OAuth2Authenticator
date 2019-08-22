@@ -27,7 +27,7 @@ namespace OAuth2Authenticator
         [Option("scope", Required = true, HelpText = "The scope of the access request.")]
         public string Scope { get; set; }
 
-        [Option("response_handler", Required = false, HelpText = "Defines what to do with the result.")]
+        [Option("out", Required = false, HelpText = "Defines what to do with the result.")]
         public ResponseHandlerEnum ResponseHandler { get; set; } = ResponseHandlerEnum.StdOut;
     }
 
@@ -35,5 +35,6 @@ namespace OAuth2Authenticator
     {
         StdOut,
         Env,
+        Access_Token,
     }
 }

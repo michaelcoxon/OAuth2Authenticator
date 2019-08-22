@@ -31,10 +31,13 @@ namespace OAuth2Authenticator
             // use the browser title as the form title.
             this.webBrowser1.DocumentTitleChanged += (s, e2) =>
             {
-                this.Invoke(new Action(() =>
+                if (runOnce)
                 {
-                    this.Text = this.webBrowser1.DocumentTitle;
-                }));
+                    this.Invoke(new Action(() =>
+                    {
+                        this.Text = this.webBrowser1.DocumentTitle;
+                    }));
+                }
             };
 
             // We need to catch this event here cause there is a possiblity
